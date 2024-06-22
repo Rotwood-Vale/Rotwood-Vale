@@ -6,6 +6,7 @@
 	total_positions = 0
 	spawn_positions = 0
 
+	banned_flaws = list(/datum/charflaw/noeyes)
 	allowed_races = RACES_TOLERATED_UP
 
 	tutorial = "You came to rockhill after hearing that there is a lack of potion-makers outside of the nobility. Stir up potions with your alchemy expertise, of health or death."

@@ -8,6 +8,19 @@ GLOBAL_LIST_INIT(character_flaws, list("Alcoholic"=/datum/charflaw/addiction/alc
 	"No Arm (R)"=/datum/charflaw/limbloss/arm_r,
 	"No Arm (L)"=/datum/charflaw/limbloss/arm_l,
 	"Paranoid"=/datum/charflaw/paranoid,
+	"Blind"=/datum/charflaw/noeyes,
+	"Random Flaw"=/datum/charflaw/randflaw,
+	"No Flaw (3 TRI)"=/datum/charflaw/noflaw))
+
+GLOBAL_LIST_INIT(randomizable_character_flaws, list("Alcoholic"=/datum/charflaw/addiction/alcoholic,
+	"Devout Follower"=/datum/charflaw/addiction/godfearing,
+	"Smoker"=/datum/charflaw/addiction/smoker,
+	"Junkie"=/datum/charflaw/addiction/junkie,
+	"Cyclops (R)"=/datum/charflaw/noeyer,
+	"Cyclops (L)"=/datum/charflaw/noeyel,
+	"No Arm (R)"=/datum/charflaw/limbloss/arm_r,
+	"No Arm (L)"=/datum/charflaw/limbloss/arm_l,
+	"Paranoid"=/datum/charflaw/paranoid,
 	"Random Flaw"=/datum/charflaw/randflaw,
 	"No Flaw (3 TRI)"=/datum/charflaw/noflaw))
 
@@ -44,15 +57,15 @@ GLOBAL_LIST_INIT(character_flaws, list("Alcoholic"=/datum/charflaw/addiction/alc
 		if(H.ckey)
 			nochekk = FALSE
 			if(prob(50))
-				var/flawz = GLOB.character_flaws.Copy()
+				var/flawz = GLOB.randomizable_character_flaws.Copy()
 				var/charflaw = pick_n_take(flawz)
-				charflaw = GLOB.character_flaws[charflaw]
+				charflaw = GLOB.randomizable_character_flaws[charflaw]
 				if((charflaw == type) || (charflaw == /datum/charflaw/noflaw))
 					charflaw = pick_n_take(flawz)
-					charflaw = GLOB.character_flaws[charflaw]
+					charflaw = GLOB.randomizable_character_flaws[charflaw]
 				if((charflaw == type) || (charflaw == /datum/charflaw/noflaw))
 					charflaw = pick_n_take(flawz)
-					charflaw = GLOB.character_flaws[charflaw]
+					charflaw = GLOB.randomizable_character_flaws[charflaw]
 				H.charflaw = new charflaw()
 				H.charflaw.on_mob_creation(H)
 			else
@@ -77,15 +90,15 @@ GLOBAL_LIST_INIT(character_flaws, list("Alcoholic"=/datum/charflaw/addiction/alc
 		if(H.ckey)
 			if(H.get_triumphs() < 3)
 				nochekk = FALSE
-				var/flawz = GLOB.character_flaws.Copy()
+				var/flawz = GLOB.randomizable_character_flaws.Copy()
 				var/charflaw = pick_n_take(flawz)
-				charflaw = GLOB.character_flaws[charflaw]
+				charflaw = GLOB.randomizable_character_flaws[charflaw]
 				if((charflaw == type) || (charflaw == /datum/charflaw/randflaw))
 					charflaw = pick_n_take(flawz)
-					charflaw = GLOB.character_flaws[charflaw]
+					charflaw = GLOB.randomizable_character_flaws[charflaw]
 				if((charflaw == type) || (charflaw == /datum/charflaw/randflaw))
 					charflaw = pick_n_take(flawz)
-					charflaw = GLOB.character_flaws[charflaw]
+					charflaw = GLOB.randomizable_character_flaws[charflaw]
 				H.charflaw = new charflaw()
 				H.charflaw.on_mob_creation(H)
 			else
@@ -194,4 +207,16 @@ GLOBAL_LIST_INIT(character_flaws, list("Alcoholic"=/datum/charflaw/addiction/alc
 		H.equip_to_slot_or_del(new /obj/item/clothing/mask/rogue/eyepatch/left(H), SLOT_WEAR_MASK)
 	var/obj/item/bodypart/head/head = H.get_bodypart(BODY_ZONE_HEAD)
 	head?.add_wound(/datum/wound/facial/eyes/left/permanent)
+	H.update_fov_angles()
+
+/datum/charflaw/noeyes
+	name = "Blind"
+	desc = "Something was wrong when I was born and, despite my eyes, I'll never see again."
+
+/datum/charflaw/noeyes/on_mob_creation(mob/user)
+	..()
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/H = user
+	H.become_blind("blindness_flaw")
 	H.update_fov_angles()

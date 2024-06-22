@@ -9,6 +9,7 @@
 	f_title = "Maid"
 	allowed_races = RACES_SHUNNED_UP
 	allowed_ages = ALL_AGES_LIST
+	banned_flaws = list(/datum/charflaw/noeyes)
 
 	tutorial = "Servitude unto death; your blade a charcuterie of artisanal cheeses and meat, your armor wit and classical training. \
 			You don't consider yourself a servant anymore, if anything, you're a part of the family now. \

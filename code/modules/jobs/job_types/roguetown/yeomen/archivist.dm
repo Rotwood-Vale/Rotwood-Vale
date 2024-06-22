@@ -9,6 +9,7 @@
 	spells = list(/obj/effect/proc_holder/spell/invoked/projectile/fetch)
 	allowed_races = RACES_TOLERATED_UP
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
+	banned_flaws = list(/datum/charflaw/noeyes)
 
 	outfit = /datum/outfit/job/roguetown/archivist
 	display_order = JDO_ARCHIVIST

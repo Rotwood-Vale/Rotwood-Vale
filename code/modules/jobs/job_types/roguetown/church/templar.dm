@@ -8,6 +8,7 @@
 	allowed_sexes = list(MALE)
 	allowed_races = RACES_TOLERATED_UP
 	allowed_patrons = ALL_CLERIC_PATRONS
+	banned_flaws = list(/datum/charflaw/noeyes)
 	outfit = /datum/outfit/job/roguetown/templar
 	min_pq = 2
 	max_pq = null

@@ -8,6 +8,7 @@
 	allowed_sexes = list(MALE)
 	allowed_races = list()
 	allowed_patrons = list(/datum/patron/inhumen/graggar)
+	banned_flaws = list(/datum/charflaw/noeyes)
 	tutorial = "Goblin Guards rensposible for their kingdom and his majesty King."
 	display_order = JDO_GOBLINGUARD
 	outfit = /datum/outfit/job/roguetown/goblinguard
